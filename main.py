@@ -2,6 +2,7 @@ from ultralytics import YOLO
 from preprocess import preprocess_yolo_dataset
 from detection_eval import evaluate_single_model
 from visualize_images import visualize_predictions
+from video_pipeline import process_videos_folder
 
 
 def main():
@@ -36,6 +37,15 @@ def main():
         show=False,
         max_images=20,
     )
+
+    process_videos_folder(
+        folder_path="sample_videos/sample_videos_tsora",
+        output_video_dir="outputs/video_visualizations/tsora",
+        results_csv_path="outputs/tracking_results/tsora_results.csv",
+        model_loss_path="model_weights/loss_yolo11_weights.pt",
+        model_yield_path="model_weights/yield_yolo11_weights.pt",
+    )
+
 
 if __name__ == "__main__":
     main()
