@@ -1,16 +1,17 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from preprocess import preprocess_yolo_dataset
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    preprocess_yolo_dataset(
+        raw_dataset_dir="sample_datasets/raw/sample_dataset_yield_raw",
+        processed_dataset_dir="sample_datasets/processed/sample_dataset_yield_processed",
+    )
+
+    preprocess_yolo_dataset(
+        raw_dataset_dir="sample_datasets/raw/sample_dataset_loss_raw",
+        processed_dataset_dir="sample_datasets/processed/sample_dataset_loss_processed",
+    )
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
