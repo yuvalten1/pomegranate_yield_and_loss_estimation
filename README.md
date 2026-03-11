@@ -4,11 +4,25 @@
  <img width="431" height="689" alt="image" src="https://github.com/user-attachments/assets/5bb5dcc8-5024-4944-91c0-11ffa0c5105d" />
 </p>
 
-<h4 align="center"> Author: Yuval Tenenboim </h4>
-<h4 align="center"> Supervisors: Prof. Yael Edan, Dr. Tarin Paz-Kagan </h4>
+<h4 align="center">
+Yuval Tenenboim<sup>1,2</sup>, Yael Edan<sup>1</sup>, Idit Ginzberg<sup>3</sup>, Victor Alchanati<sup>4</sup>, Tarin Paz-Kagan<sup>2</sup>
+</h4>
 
-<h4 align="center"> Dept. of Industrial Engineering & Management, Ben-Gurion University of the Negev </h4>
-<h4 align="center"> The Jacob Blaustein Institutes for Desert Research, Ben-Gurion University of the Negev, Israel </h4>
+<h4 align="center">
+<sup>1</sup> Dept. of Industrial Engineering & Management, Ben-Gurion University of the Negev, Israel
+</h4>
+
+<h4 align="center">
+<sup>2</sup> The Jacob Blaustein Institutes for Desert Research, Ben-Gurion University of the Negev, Israel
+</h4>
+
+<h4 align="center">
+<sup>3</sup> Institute of Plant Sciences, Agricultural Research Organization, Volcani Institute, Rishon LeZion, Israel
+</h4>
+
+<h4 align="center">
+<sup>4</sup> Institute of Agricultural and Biosystems Engineering, Agricultural Research Organization, Volcani Institute, Israel
+</h4>
 
 ---
 
@@ -53,7 +67,14 @@ The system was evaluated on UAV video data collected from multiple commercial or
 ---
 
 ## Method Overview
-
+<p>
+The overall workflow of the proposed framework is illustrated in the figure below. 
+It summarizes the main stages of the pipeline, from UAV data acquisition and dataset preparation 
+to fruit detection, tracking, and tree-scale yield and fruit loss estimation.
+</p>
+<p align="center">
+<img width="2000" height="789" alt="image" src="https://github.com/user-attachments/assets/9f3700c1-0d0b-4f90-a487-9fa1d653b2be" />
+</p>
 The proposed framework consists of the following stages.
 
 ### 1. Image preprocessing
@@ -103,9 +124,9 @@ UAV videos are captured while flying along orchard rows.
 
 The framework:
 
-- splits detections by **left and right tree sides**
-- counts fruits for the relevant tree side
-- aggregates counts for yield and loss estimation.
+- splits detections according to the **left and right sides of the video frame**
+- counts fruits only on the side corresponding to the measured tree
+- aggregates these counts to estimate tree-level yield and fruit loss
 
 ---
 
@@ -142,4 +163,63 @@ pomegranate_yield_and_loss_estimation/
 
 <p>
 Note: the folders <b>sample_datasets/processed</b> and <b>outputs/</b> are generated automatically when running the pipeline and are therefore not included in the repository. They will be created when the relevant scripts are executed.
+</p>
+
+<h2>Video Filename Format</h2>
+
+<p>
+The video processing pipeline extracts metadata directly from the video filename.
+Therefore, videos must follow a specific naming convention in order to be processed correctly.
+</p>
+
+<p>
+The filename structure used in this repository is:
+</p>
+
+<pre>
+treeNumber_side_plot_additional_information.mp4
+</pre>
+
+<p>
+For example:
+</p>
+
+<pre>
+1_r_mishmar_hanegev_11_org_vid_row_9_plot_11_1_first_forward.mp4
+</pre>
+
+<h3>Parsed Information</h3>
+
+<ul>
+<li><b>treeNumber</b> – the tree index in the orchard row</li>
+<li><b>side</b> – side of the tree being measured, indicating which side of the video the yield and fruit loss are counted from</li>    <ul>
+        <li><b>l</b> – left side</li>
+        <li><b>r</b> – right side</li>
+    </ul>
+</li>
+<li><b>plot</b> – orchard plot identifier extracted from the name</li>
+</ul>
+
+<p>
+The code automatically parses these fields using the function <code>parse_video_name()</code>.
+This information is later used to aggregate fruit counts per tree and per orchard plot.
+</p>
+
+<h3>Example Parsing</h3>
+
+<pre>
+Filename:
+1_r_mishmar_hanegev_11_org_vid_row_9_plot_11_1_first_forward.mp4
+
+Parsed values:
+tree_number = 1
+side = r
+plot = mishmar_hanegev_11
+</pre>
+
+<h3>Important</h3>
+
+<p>
+If the filename does not follow this structure, the pipeline will not be able to extract
+tree and plot information correctly and the video may be skipped during processing.
 </p>
