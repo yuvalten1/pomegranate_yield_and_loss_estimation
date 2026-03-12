@@ -1,0 +1,11 @@
+names:
+- defected
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: tzora_pomogranate_cropped
+  url: https://universe.roboflow.com/image-proccesing-gsjxv/tzora_pomogranate_cropped/dataset/22
+  version: 22
+test: ../test/images
+train: ../train/images
+val: ../valid/images
