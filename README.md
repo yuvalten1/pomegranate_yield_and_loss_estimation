@@ -85,6 +85,9 @@ Video frames are enhanced using:
 - saturation enhancement
 
 These operations improve detection robustness under outdoor orchard lighting conditions.
+<p align="center">
+<img width="889" height="676" alt="Image" src="https://github.com/user-attachments/assets/251d50a2-261a-4968-9e96-a08c46a4809f" />
+ </p>
 
 ---
 
@@ -94,8 +97,12 @@ Two independent detection models are trained using **Ultralytics YOLO**:
 
 | Model | Task |
 |------|------|
-| Yield model | Detect healthy pomegranates |
-| Loss model | Detect cracked or defected fruits |
+| Yield model | Detect healthy pomegranates (on the tree) |
+| Loss model | Detect cracked or defected fruits (mainly on the ground due to pruning) |
+
+<p align="center">
+<img width="741" height="775" alt="Image" src="https://github.com/user-attachments/assets/9ff8d5c9-836e-4c11-9fc5-654d561f1170" /> 
+</p>
 
 ---
 
@@ -137,6 +144,7 @@ The framework:
 <pre>
 pomegranate_yield_and_loss_estimation/
 │
+├── requirements.txt
 ├── main.py                     # Entry point for running the pipeline
 │
 ├── preprocess.py               # Image preprocessing (CLAHE + saturation)
