@@ -1,0 +1,10 @@
+ultralytics
+torch
+torchvision
+torchaudio
+supervision==0.25.0
+trackers==2.0.1
+opencv-python
+numpy
+matplotlib
+roboflow
